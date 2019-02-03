@@ -1,0 +1,53 @@
+service: voxly-dev-test-api
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+provider:
+  name: aws
+  region: eu-west-2
+  runtime: nodejs6.10
+  environment:
+    DYNAMODB_TABLE: 'VoxlyTest'
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+        - dynamodb:PutItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:*"
+
+functions:
+
+  create:
+    handler: handlers/create.create
+    events:
+      - http:
+          path: /
+          method: post
+          cors: true
+
+  readAll:
+    handler: handlers/readAll.readAll
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    VoxlyInsightsDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
