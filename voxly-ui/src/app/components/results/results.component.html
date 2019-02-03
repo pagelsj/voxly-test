@@ -1,0 +1,26 @@
+<section class="card">
+	<div class="card-header">
+		View records
+	</div>
+	<div class="card-body">
+		<p>Average mood is {{ moodAverage }} over {{ insightResults.length }} entries</p>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Mood</th>
+					<th>Feeling</th>
+					<th>Comment</th>
+					<th>Time</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let entry of insightResults;">
+					<td>{{entry.mood}}</td>
+					<td>{{entry.feeling}}</td>
+					<td>{{entry.comment}}</td>
+					<td>{{entry.time | date:'short'}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>

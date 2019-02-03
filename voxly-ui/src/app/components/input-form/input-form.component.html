@@ -1,0 +1,65 @@
+<section class="card">
+	<div class="card-header">
+		Enter a new record
+	</div>
+	<div class="card-body">
+		<div class="alert alert-success" *ngIf="successfullyAdded">
+		  New record has been added successfully.
+		</div>
+		<div class="alert alert-warning" *ngIf="insightForm.invalid && isSubmitted">
+		  Please ensure that at least a mood and feeling have been selected
+		</div>
+		<form [formGroup]="insightForm" (ngSubmit)="submitForm()">
+		  <div class="form-group">
+		    <label>Mood:</label>
+		    <small class="form-text text-muted">1 - Bad, 7 - Excellent</small>
+
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="mood1" name="mood" class="custom-control-input" value="1" formControlName="mood">
+			  <label class="custom-control-label" for="mood1">1</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="mood2" name="mood" class="custom-control-input" value="2" formControlName="mood">
+			  <label class="custom-control-label" for="mood2">2</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="mood3" name="mood" class="custom-control-input" value="3" formControlName="mood">
+			  <label class="custom-control-label" for="mood3">3</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="mood4" name="mood" class="custom-control-input" value="4" formControlName="mood">
+			  <label class="custom-control-label" for="mood4">4</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="mood5" name="mood" class="custom-control-input" value="5" formControlName="mood">
+			  <label class="custom-control-label" for="mood5">5</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="mood6" name="mood" class="custom-control-input" value="6" formControlName="mood">
+			  <label class="custom-control-label" for="mood6">6</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" id="mood7" name="mood" class="custom-control-input" value="7" formControlName="mood">
+			  <label class="custom-control-label" for="mood7">7</label>
+			</div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label>Feeling:</label>
+		    <select class="custom-select" formControlName="feeling">
+		    	<option value="Depressed">Depressed</option>
+		    	<option value="Optimistic">Optimistic</option>
+		    	<option value="Bored">Bored</option>
+		    	<option value="Happy">Happy</option>
+		    </select>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label>Check me out</label>
+		    <textarea class="form-control" formControlName="comment"></textarea>
+		  </div>
+
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</section>
